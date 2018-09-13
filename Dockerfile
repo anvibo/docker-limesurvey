@@ -2,8 +2,8 @@ FROM anvibo/nginx-php:7.0
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get --no-install-recommends -y install \
-	curl \
+RUN apt-get update && apt-get -y install \
+	wget \
 	php7.0-xml \
 	php7.0-mysql \
 	php7.0-mbstring \
@@ -12,11 +12,13 @@ RUN apt-get update && apt-get --no-install-recommends -y install \
 	php7.0-zip \
 	php7.0-imap \
 	php7.0-pgsql \
-&& rm -rf /var/lib/apt/lists/* \
-&& curl -o /tmp/ls.tar.gz "https://github.com/LimeSurvey/LimeSurvey/archive/3.14.7+180827.tar.gz" \
+&& rm -rf /var/lib/apt/lists/* \ 
+&& wget -O /tmp/ls.tar.gz "https://github.com/LimeSurvey/LimeSurvey/archive/3.14.7+180827.tar.gz" \
+&& apt-get remove --purge -y wget \
+&& apt-get autoremove --purge -y \
 && cd /tmp && tar zxf /tmp/ls.tar.gz \
 && mv /tmp/LimeSurvey-*/* /app/ \
-&& rm -rfv /tmp/* \
+&& rm -rfv /tmp/* 
 
 RUN chown -R www-data:www-data /app/tmp
 RUN chown -R www-data:www-data /app/upload
