@@ -1,17 +1,17 @@
-FROM anvibo/nginx-php:7.0
+FROM anvibo/nginx-php:7.2
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get -y install \
 	wget \
-	php7.0-xml \
-	php7.0-mysql \
-	php7.0-mbstring \
-	php7.0-gd \
-	php7.0-ldap \
-	php7.0-zip \
-	php7.0-imap \
-	php7.0-pgsql \
+	php7.2-xml \
+	php7.2-mysql \
+	php7.2-mbstring \
+	php7.2-gd \
+	php7.2-ldap \
+	php7.2-zip \
+	php7.2-imap \
+	php7.2-pgsql \
 && rm -rf /var/lib/apt/lists/* \ 
 && wget -O /tmp/ls.tar.gz "https://github.com/LimeSurvey/LimeSurvey/archive/3.14.7+180827.tar.gz" \
 && apt-get remove --purge -y wget \
